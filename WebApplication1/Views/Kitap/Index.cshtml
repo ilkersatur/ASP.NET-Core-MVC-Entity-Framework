@@ -1,0 +1,18 @@
+﻿@model IEnumerable<WebApplication1.Models.Kitap>
+
+<h1>Kitaplar</h1>
+<a asp-action="Ekle">Yeni Kitap Ekle</a>
+<br />
+<table>
+    @foreach(Kitap kitap in Model)
+    {
+        <tr>
+            <td><img src="~/Resimler/@kitap.KapakResmi" width="200px" height="150px" /></td>
+            <td>@kitap.KitapID</td>
+            <td>@kitap.KitapAdi</td>
+            <td>@kitap.KategoriID</td>
+            <td>@kitap.Kategori.KategoriAdi</td>
+            <td>@kitap.Fiyat</td>
+        </tr>
+    }
+</table>

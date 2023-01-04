@@ -1,0 +1,63 @@
+﻿@model WebApplication1.Models.Kitap
+<script>
+    function KontrolEt()
+    {
+        let kontrols = document.getElementsByTagName("input");
+        let sayac=0;
+        for(let i=0;i<kontrols.length;i++)
+        {
+            let msg="";
+            if(kontrols[i].type=="text" && kontrols[i].value=="")
+                //alert(kontrols[i].name);
+                {
+                    msg += kontrols[i].name + "";                            sayac++;
+                }
+
+        }
+        if(sayac !=0)
+        {
+          let div=document.getElementById("mesaj");
+          div.innerHTML =  "Boş geçemezsiniz...";
+        }
+        //alert(sayac);
+        return sayac ==0 ? true:false;
+         
+    }
+</script>
+
+<form asp-action="Ekle" method="post" enctype="multipart/form-data">
+    <table>
+        <tr>
+            @*<td>Kitap Adi:</td>*@
+            <td>@Html.DisplayNameFor(k=>k.KitapAdi)</td>
+            @*<td> <input type="text" asp-for="KitapAdi" required /></td>*@
+            <td> <input type="text" asp-for="KitapAdi"/></td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(k=>k.KategoriID)</td>
+            @*<td> <input type="text" asp-for="KategoriID" /></td>*@
+            <td><SELECT asp-items="@ViewBag.Kategoriler" asp-for="KategoriID"></SELECT></td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(k=>k.Fiyat)</td>
+            <td> <input type="text" asp-for="Fiyat" /></td>
+        </tr>
+        <!--Kapak Resmi için eklenmiştir...-->
+        <tr>
+            <td>@Html.DisplayNameFor(k=>k.KapakResmi)</td>
+            <td> <input type="file" name="Dosya" /></td>
+        </tr>
+
+
+
+        <tr>
+            <td></td>
+            @*<td><input type="submit" value="KAYDET" onclick="return KontrolEt()" /></td>*@
+            <td><input type="submit" value="KAYDET" /></td>
+        </tr>
+    </table>
+   
+</form>
+
+<div id="mesaj"></div>
+<div asp-validation-summary="All" style="color:red;"></div>
